@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap');
+
+*{
+  font-family: 'Roboto', sans-serif;
+}
+a.active,
+a:focus,
+button:focus,
+button.active {
+  outline: none;
+}
+
+a {
+  text-decoration: none!important;
+  color: inherit!important;
+}
+
+a:focus,
+a:hover,
+a:active {
+  outline: 0;
+  box-shadow: none;
+  color: inherit;
+}
+
+@media all and (min-width: 992px) {
+  .navbar .nav-item .dropdown-menu {
+    display: none;
+  }
+  .navbar .nav-item:hover .dropdown-menu {
+    display: block;
+  }
+  .navbar .nav-item .dropdown-menu {
+    margin-top: 0;
+  }
+}
+
+.form-control{
+  border-radius: 0;
+}
+.avatar {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  transform: translateY(-3px);
+  border-radius: 50%;
+}
+
+@import url('./styles/Navbar.css');
+@import url('./styles/Home.css');
+@import url('./styles/PostBlog.css');
+@import url('./styles/Loading.css');
+@import url('./styles/LoadingCom.css');
