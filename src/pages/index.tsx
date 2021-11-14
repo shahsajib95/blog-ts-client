@@ -1,4 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
+import LoadingCom from "../component/global/LoadinCom/LoadingCom";
+import Nothings from "../component/global/Nothings";
 import CommonBlog from "../component/Home/CommonBlog";
 import { getAPI } from "../utils/FetchData";
 import { IBlog } from "../utils/Typescript";
@@ -21,14 +23,12 @@ const Home = () => {
   const blogData = () => {
     return (
       <>
-        {blogs.length === 0 && !loading &&(
-          <h2 className="text-center my-5">Nothing to show</h2>
-        )}
+        {blogs.length === 0 && !loading && <Nothings />}
         {loading ? (
-          <h2 className="text-center my-5">Loading</h2>
+          <LoadingCom />
         ) : (
           <div className="row">
-            {blogs.map((item) => (
+            {blogs?.map((item) => (
               <CommonBlog blog={item} key={item._id} />
             ))}
           </div>
@@ -43,7 +43,6 @@ const Home = () => {
         <strong>Blog</strong>
       </h1>
       <ul className="nav nav-tabs mt-5" id="myTab" role="tablist">
-   
         <li className="nav-item" role="presentation">
           <button
             className="nav-link active"

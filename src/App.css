@@ -1,7 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap");
 
-*{
-  font-family: 'Roboto', sans-serif;
+* {
+  font-family: "Roboto", sans-serif;
+}
+body {
+  background-color: #ffd800!important;
 }
 a.active,
 a:focus,
@@ -11,8 +14,8 @@ button.active {
 }
 
 a {
-  text-decoration: none!important;
-  color: inherit!important;
+  text-decoration: none !important;
+  color: inherit !important;
 }
 
 a:focus,
@@ -35,7 +38,7 @@ a:active {
   }
 }
 
-.form-control{
+.form-control {
   border-radius: 0;
 }
 .avatar {
@@ -45,9 +48,17 @@ a:active {
   transform: translateY(-3px);
   border-radius: 50%;
 }
+.avatar-lg {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  transform: translateY(-3px);
+  border-radius: 50%;
+}
 
-@import url('./styles/Navbar.css');
-@import url('./styles/Home.css');
-@import url('./styles/PostBlog.css');
-@import url('./styles/Loading.css');
-@import url('./styles/LoadingCom.css');
+@import url("./styles/Navbar.css");
+@import url("./styles/Home.css");
+@import url("./styles/PostBlog.css");
+@import url("./styles/Loading.css");
+@import url("./styles/LoadingCom.css");
+@import url("./styles/UserDetails.css");

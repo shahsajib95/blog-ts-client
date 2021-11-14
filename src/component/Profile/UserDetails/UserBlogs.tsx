@@ -14,14 +14,17 @@ const UserBlogs = ({ id }: Id) => {
 
   const getUserBlogs = useCallback(async () => {
     setLoading(true);
-    const res = await getAPI(`user/blog/${id}`);
-    setBlog(res.data);
+    if (id) {
+      const res = await getAPI(`user/blog/${id}`);
+      setBlog(res.data);
+    }
     setLoading(false);
-  }, [id]);
+  }, []);
 
   useEffect(() => {
     getUserBlogs();
-  }, [getUserBlogs]);
+  }, [id]);
+
   const [blogData, setBlogData] = useState<IBlog>({} as IBlog);
   return (
     <div className="user-blog p-3">

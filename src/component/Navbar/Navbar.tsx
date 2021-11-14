@@ -1,21 +1,18 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { DataContext } from "../../store/GlobalState";
-import { FiLogOut } from "react-icons/fi";
+import LoggedInNav from "./LoggedInNav";
 
 const Navbar = () => {
   const { state } = useContext(DataContext);
   const { user } = state;
 
-  const logOut = () => {
-    localStorage.removeItem("token");
-    window.location.href = "/";
-  };
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-lg">
       <div className="container">
-        <Link className="navbar-brand text-white" to="/">
-          Backpacker Lite
+        <Link className="navbar-brand" to="/">
+          <strong>Backpacker Lite</strong>
         </Link>
         <button
           className="navbar-toggler"
@@ -37,45 +34,7 @@ const Navbar = () => {
               </Link>
             </li>
             {user.email ? (
-              <>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/post-blog">
-                    Post Blog
-                  </Link>
-                </li>
-
-                <li className="nav-item dropdown">
-                  <Link
-                    className="nav-link dropdown-toggle"
-                    to="#"
-                    id="navbarDropdown"
-                    role="button"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <img
-                      src={user.avatar}
-                      alt="userAvatar"
-                      className="avatar"
-                    />{" "}
-                    <span className="ml-3">{user.name}</span>
-                  </Link>
-                  <div
-                    className="dropdown-menu"
-                    aria-labelledby="navbarDropdown"
-                  >
-                    <Link className="dropdown-item" to={`/profile/${user._id}`}>
-                      Profile
-                    </Link>
-                    <div className="dropdown-divider"></div>
-                    <Link className="dropdown-item" to="#" onClick={logOut}>
-                      <FiLogOut />
-                      <span className="ml-3">Log Out</span>
-                    </Link>
-                  </div>
-                </li>
-              </>
+                <LoggedInNav user={user}/>
             ) : (
               <>
                 <li className="nav-item">

@@ -1,0 +1,44 @@
+ /* Container needed to position the overlay. Adjust the width as needed */
+ .user-details-img {
+    position: relative;
+  }
+
+  
+  /* The overlay effect (full height and width) - lays on top of the container and over the image */
+  .overlay {
+    position: absolute;
+    top: -2px!important;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    opacity: 0;
+    transition: .3s ease;
+    background-color: rgba(0, 0, 0, 0.103);
+    cursor: pointer;
+  }
+  
+  /* When you mouse over the container, fade in the overlay icon*/
+  .user-details-img:hover .overlay {
+    opacity: 1;
+  }
+  
+  /* The icon inside the overlay is positioned in the middle vertically and horizontally */
+  .icon {
+
+    color: white!important;
+    font-size: 1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  /* When you move the mouse over the icon, change color */
+  .fa-user:hover {
+    color: #eee;
+  } 

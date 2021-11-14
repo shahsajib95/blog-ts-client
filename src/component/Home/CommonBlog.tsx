@@ -14,7 +14,7 @@ const CommonBlog: React.FC<IProps> = ({ blog }: IProps) => {
       <div className="blog-details m-3">
         <Link to={`/profile/${user._id}`}>
           <div className="d-flex align-items-center">
-            <img src={user.avatar} alt="authorImage" className="avatar" />
+            <img  src={`data:image/jpeg;base64,${user.avatar}`} alt="authorImage" className="avatar" />
             <h6 className="mx-5 fw-bold">{user.name}</h6>
           </div>
         </Link>

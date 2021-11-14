@@ -18,7 +18,7 @@ const Details: React.FC<IProps> = ({ blog }: IProps) => {
       <Link to={`/profile/${user._id}`}>
         <div className="d-flex align-items-center my-5">
           <img
-            src="https://c.tadst.com/gfx/750x500/authors-day-fun.jpg"
+            src={`data:image/jpeg;base64,${user.avatar}`}
             alt="authorImage"
             className="avatar"
           />

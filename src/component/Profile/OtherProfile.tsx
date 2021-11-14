@@ -14,10 +14,10 @@ const OtherProfile = ({ id }: Id) => {
     const res = await getAPI(`user/${id}`);
     setUser({ ...res.data.userData[0], blogCount: res.data.blogCount });
     setLoading(false);
-  }, [id]);
+  }, []);
   useEffect(() => {
     getUser();
-  }, [getUser]);
+  }, [id]);
   if (loading) return <Loading />;
   return (
     <div className="container my-5">

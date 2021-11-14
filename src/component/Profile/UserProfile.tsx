@@ -4,24 +4,28 @@ import { Id, IUserDetails } from "../../utils/Typescript";
 import Loading from "../global/Alert/Loading";
 import UserDetails from "./UserDetails/UserDetails";
 
+type IblogCount = {
+  blogCount: number;
+};
+
 const UserProfile = ({ id }: Id) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [user, setUser] = useState<IUserDetails>({} as IUserDetails);
+  const [blogCount, setBlogCount] = useState<number>(0);
 
   const getUser = useCallback(async () => {
     setLoading(true);
     const res = await getAPI(`user/${id}`);
-    setUser({...res.data.userData[0], blogCount: res.data.blogCount});
+    setBlogCount(res.data.blogCount);
     setLoading(false);
-  }, [id]);
+  }, []);
   useEffect(() => {
     getUser();
-  }, [getUser]);
-
-  if(loading) return <Loading/>
+  }, [id]);
+  console.log(blogCount)
+  if (loading) return <Loading />;
   return (
     <div className="container my-5">
-        <UserDetails user={user}  />
+      <UserDetails blogCount={blogCount} />
     </div>
   );
 };

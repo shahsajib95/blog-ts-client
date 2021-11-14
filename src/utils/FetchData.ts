@@ -1,7 +1,7 @@
 import axios from 'axios'
 axios.defaults.withCredentials = true
 
-export const API_URL = "http://localhost:5000"
+export const API_URL = "https://blog-ts-server.herokuapp.com/"
 
 
 export const postAPI = async (url: string, post: object, token?:string) => {
