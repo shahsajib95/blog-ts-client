@@ -10,7 +10,7 @@ import "draft-js/dist/Draft.css";
 import { convertToHTML } from "draft-convert";
 import PostEditor from "../component/PostBlog/PostEditor";
 import { useHistory } from "react-router";
-
+import { FcAddDatabase } from "react-icons/fc";
 
 const PostBlog = () => {
   const history = useHistory()
@@ -40,8 +40,7 @@ const PostBlog = () => {
     });
     setBody(convertToHTML(editor.editorState.getCurrentContent()));
   };
-  console.log(typeof body)
-
+ 
   const checkKeyDown = (e: any) => {
     if (e.keyCode === 13) e.preventDefault();
   };
@@ -50,15 +49,18 @@ const PostBlog = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const check = validPostBlog({ ...blog, body: editor, file: file });
     if (check.errLength > 0)
       return dispatch({ type: "NOTIFY", payload: { error: check.errMsg } });
+
     const formData = new FormData();
     formData.append("title", blog.title);
     formData.append("body", body);
     formData.append("tags", tags.toString());
     formData.append("user", state.user._id);
     formData.append("file", file);
+
     try {
       dispatch({ type: "NOTIFY", payload: { loading: true } });
       const res = await postAPI("blog/post", formData);
@@ -66,18 +68,19 @@ const PostBlog = () => {
         return dispatch({ type: "NOTIFY", payload: { error: res.data.err } });
       dispatch({ type: "NOTIFY", payload: { loading: false } });
       history.push(`/blog/${res.data._id}`)
-      console.log(res.data);
     } catch (e: any) {
       console.log(e.message);
       dispatch({ type: "NOTIFY", payload: { loading: false } });
     }
   };
-  console.log(editor);
+
   if (!state.user.email) return <NotFound />;
   return (
-    <section className="container my-5">
+    <section className="post-blog container my-5" style={{minHeight: '100vh'}}>
+      <h2 className="text-center"><FcAddDatabase/></h2>
+      <h2 className="text-center"><strong>Post Blog</strong></h2>
       <form
-        className="mx-auto my-5"
+        className="mx-auto mb-5"
         style={{ maxWidth: "500px" }}
         onSubmit={handleSubmit}
         onKeyDown={(e) => checkKeyDown(e)}
@@ -120,7 +123,7 @@ const PostBlog = () => {
           </label>
           <Tag tags={tags} setTags={setTags} />
         </div>
-        <button type="submit" className="btn bg-dark text-white form-control">
+        <button type="submit" className="btn bg-color text-white form-control">
           Post
         </button>
       </form>

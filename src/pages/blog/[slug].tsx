@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useParams } from "react-router";
 import Details from "../../component/Blogs/Details";
+import Loading from "../../component/global/Alert/Loading";
 import { getAPI } from "../../utils/FetchData";
 import { IBlog, IParams } from "../../utils/Typescript";
 
@@ -19,18 +20,9 @@ const BlogDetails = () => {
     getBlog();
   }, [getBlog]);
 
-  if (loading)
-    return (
-      <h2
-        className="text-center d-flex justify-content-center align-items-center my-5"
-        style={{ height: "100vh" }}
-      >
-        Loading
-      </h2>
-    );
-
+  if (loading) return <Loading />;
   return (
-    <section className="blog-details container my-5">
+    <section className="blog-details" style={{minHeight: '100vh'}}>
       {blog.map((item) => (
         <Details blog={item} key={item._id} />
       ))}

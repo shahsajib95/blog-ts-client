@@ -1,4 +1,4 @@
-import { IBlogPost,  IRegister } from "./Typescript";
+import { IBlogPost, IFile, IRegister, IUserEdit } from "./Typescript";
 
 export const validRegister = ({
   name,
@@ -57,8 +57,44 @@ export const validPostBlog = ({ title, body, file }: IBlogPost) => {
 
   if (!file?.type) {
     errors.push("Please add a file");
-  }else if(file?.size > 5242880){
-    errors.push("File size can not be more than 5 mb.");
+  } else if (file?.size > 1048576) {
+    errors.push("File size can not be more than 1 mb.");
+  }
+
+  return {
+    errMsg: errors,
+    errLength: errors.length,
+  };
+};
+
+export const validUserEdit = ({ name, email }: IUserEdit) => {
+  const errors: string[] = [];
+
+  if (!name) {
+    errors.push("Please add your name.");
+  } else if (name.length > 20) {
+    errors.push("Your name is up to 20 chars long.");
+  }
+
+  if (!email) {
+    errors.push("Please add your email");
+  } else if (!validateEmail(email)) {
+    errors.push("Email or phone number format is incorrect.");
+  }
+
+  return {
+    errMsg: errors,
+    errLength: errors.length,
+  };
+};
+
+export const validFile = ({ file }: IFile) => {
+  const errors: string[] = [];
+
+  if (!file?.type) {
+    errors.push("Please add a file");
+  } else if (file?.size > 1048576) {
+    errors.push("File size can not be more than 1 mb.");
   }
 
   return {

@@ -1,0 +1,22 @@
+.pagination {
+  background-color: #7452f0 !important;
+  border-radius: 10px;
+}
+.page-item .page-link {
+  background-color: #7452f0 !important;
+  color: white !important;
+  font-size: 1rem;
+  margin: 10px;
+  text-align: center !important;
+  border: none;
+
+}
+.pagination > li.active > a {
+  background-color: #a186ff !important;
+  color: white !important;
+  border-radius: 50px;
+}
+.pagination > li.disabled > a {
+  color: rgb(0, 0, 0) !important;
+  border-radius: 50px;
+}

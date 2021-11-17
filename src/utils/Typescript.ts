@@ -38,6 +38,11 @@ export type IBlog ={
   }
 }
 
+export type IUserEdit ={
+  name: string,
+  email: string,
+} 
+
 export type IBlogPost ={
   title: string,
   body: string,

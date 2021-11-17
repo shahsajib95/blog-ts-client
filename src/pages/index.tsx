@@ -1,24 +1,50 @@
 import React, { useCallback, useEffect, useState } from "react";
 import LoadingCom from "../component/global/LoadinCom/LoadingCom";
 import Nothings from "../component/global/Nothings";
+import PaginatePage from "../component/global/PaginatePage";
 import CommonBlog from "../component/Home/CommonBlog";
 import { getAPI } from "../utils/FetchData";
 import { IBlog } from "../utils/Typescript";
 
 const Home = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [url, setUrl] = useState<string>("blog/get/popular");
+  const [page, setPage] = useState<object>({ currentPage: 0, offset: 0 });
+  const [type, setype] = useState<string>("popular");
   const [blogs, setBlogs] = useState<IBlog[]>([]);
+  const [count, setCount] = useState<number>(0);
 
-  const getBlog = useCallback(async () => {
-    setLoading(true);
-    const res = await getAPI(url);
-    setBlogs(res.data);
-    setLoading(false);
-  }, [url]);
+  const getBlog = useCallback(
+    async (page, type) => {
+      setLoading(true);
+      var sendDate = new Date().getTime();
+      const res = await getAPI(
+        `blog/get/${type}?page=${page.currentPage + 1}&limit=3`
+      );
+      setBlogs(res.data.blog);
+      setCount(res.data.count);
+      var receiveDate = new Date().getTime();
+
+      var responseTimeMs = receiveDate - sendDate;
+        console.log(responseTimeMs)
+      setLoading(false);
+    },
+    [page]
+  );
   useEffect(() => {
-    getBlog();
+    getBlog(page, type);
   }, [getBlog]);
+
+  const pageCount = Math.ceil(count / 3);
+  const changePage = (e: any) => {
+    const selectedPage = e.selected;
+    const offset = selectedPage * 3;
+    setPage({ currentPage: selectedPage, offset: offset });
+  };
+
+  const changeType = (data: string) => {
+    setPage({ currentPage: 0, offset: 0 });
+    setype(data);
+  };
 
   const blogData = () => {
     return (
@@ -33,13 +59,14 @@ const Home = () => {
             ))}
           </div>
         )}
+        <PaginatePage pageCount={pageCount} changePage={changePage} />
       </>
     );
   };
 
   return (
     <section className="home container my-5">
-      <h1>
+      <h1 className="color">
         <strong>Blog</strong>
       </h1>
       <ul className="nav nav-tabs mt-5" id="myTab" role="tablist">
@@ -53,7 +80,7 @@ const Home = () => {
             role="tab"
             aria-controls="profile"
             aria-selected="false"
-            onClick={() => setUrl("blog/get/popular")}
+            onClick={() => changeType(`popular`)}
           >
             Popular
           </button>
@@ -68,7 +95,7 @@ const Home = () => {
             role="tab"
             aria-controls="contact"
             aria-selected="false"
-            onClick={() => setUrl("blog/get/recent")}
+            onClick={() => changeType(`recent`)}
           >
             Recent
           </button>
@@ -81,9 +108,6 @@ const Home = () => {
           role="tabpanel"
           aria-labelledby="profile-tab"
         >
-          <h4 className="my-4">
-            <strong>Popular Blogs</strong>
-          </h4>
           {blogData()}
         </div>
         <div
@@ -92,9 +116,6 @@ const Home = () => {
           role="tabpanel"
           aria-labelledby="contact-tab"
         >
-          <h4 className="my-4">
-            <strong>Recent Blogs</strong>
-          </h4>
           {blogData()}
         </div>
       </div>

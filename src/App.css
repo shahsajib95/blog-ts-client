@@ -1,11 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
 
 * {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
-body {
-  background-color: #ffd800!important;
-}
+
 a.active,
 a:focus,
 button:focus,
@@ -24,6 +22,14 @@ a:active {
   outline: 0;
   box-shadow: none;
   color: inherit;
+}
+
+.color{
+  color: #7452f0
+}
+.bg-color{
+  background-color: #7452f0!important;
+  color: #fff!important;
 }
 
 @media all and (min-width: 992px) {
@@ -56,9 +62,15 @@ a:active {
   border-radius: 50%;
 }
 
+.card{
+  border: none!important;
+}
+
 @import url("./styles/Navbar.css");
 @import url("./styles/Home.css");
 @import url("./styles/PostBlog.css");
 @import url("./styles/Loading.css");
 @import url("./styles/LoadingCom.css");
 @import url("./styles/UserDetails.css");
+@import url("./styles/Paginate.css");
+@import url("./styles/BlogDetails.css");

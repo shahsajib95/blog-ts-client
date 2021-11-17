@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 import { DataContext } from "../store/GlobalState";
 import { postAPI } from "../utils/FetchData";
 import { InputChange } from "../utils/Typescript";
@@ -15,11 +16,11 @@ const Login = () => {
   const history = useHistory();
 
   useEffect(() => {
-    if(state.user.email) {
-      let url = history.location.search.replace('?', '/')
-      return history.push(url)
+    if (state.user.email) {
+      let url = history.location.search.replace("?", "/");
+      return history.push(url);
     }
-  },[state.user, history])
+  }, [state.user, history]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -36,9 +37,23 @@ const Login = () => {
     }
   };
   return (
-    <section className="login container">
+    <section className="login container my-5" style={{ minHeight: "100vh" }}>
+      <h2 className="text-center">
+        <img
+          src={require("../img/logo.png").default}
+          alt="logo"
+          style={{ maxWidth: "100px" }}
+        />
+      </h2>
+      <h2 className="text-center">
+        <strong>Login</strong>
+      </h2>
       <div className="container">
-        <form className="mx-auto my-5" style={{ maxWidth: "500px" }} onSubmit={handleSubmit}>
+        <form
+          className="mx-auto my-5"
+          style={{ maxWidth: "500px" }}
+          onSubmit={handleSubmit}
+        >
           <div className="mb-3">
             <label htmlFor="exampleInputEmail1" className="form-label">
               Email address
@@ -64,9 +79,13 @@ const Login = () => {
               onChange={handleInput}
             />
           </div>
-          <button type="submit" className="btn bg-dark text-white form-control">
+          <button
+            type="submit"
+            className="btn bg-color text-white form-control"
+          >
             Submit
           </button>
+          <p className="d-flex justify-content-between my-2">Don't have a account? <u style={{cursor: 'pointer'}}><Link to="/register">Register</Link></u></p>
         </form>
       </div>
     </section>

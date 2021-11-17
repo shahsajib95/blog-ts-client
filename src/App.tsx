@@ -5,6 +5,7 @@ import { Alert } from "./component/global/Alert/Notify";
 import Navbar from "./component/Navbar/Navbar";
 import { DataProvider } from "./store/GlobalState";
 import PageRender from "./PageRender";
+import Footer from "./component/Footer/Footer";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route exact path="/:page" component={PageRender} />
             <Route exact path="/:page/:slug" component={PageRender} />
           </Switch>
+          <Footer/>
         </Router>
       </DataProvider>
     </div>

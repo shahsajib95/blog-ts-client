@@ -1,5 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
-import { DataContext } from "../../store/GlobalState";
+import React, { useCallback, useEffect, useState } from "react";
 import { getAPI } from "../../utils/FetchData";
 import { Id, IUserDetails } from "../../utils/Typescript";
 import Loading from "../global/Alert/Loading";
@@ -14,13 +13,15 @@ const OtherProfile = ({ id }: Id) => {
     const res = await getAPI(`user/${id}`);
     setUser({ ...res.data.userData[0], blogCount: res.data.blogCount });
     setLoading(false);
-  }, []);
+  }, [id]);
+
   useEffect(() => {
     getUser();
-  }, [id]);
+  }, [getUser]);
+
   if (loading) return <Loading />;
   return (
-    <div className="container my-5">
+    <div className="container my-5" style={{minHeight: '100vh'}}>
       <OtherUserDetails user={user} />
     </div>
   );

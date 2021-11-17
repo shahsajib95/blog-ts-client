@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 import { DataContext } from "../store/GlobalState";
 import { postAPI } from "../utils/FetchData";
 import { InputChange } from "../utils/Typescript";
@@ -15,11 +16,11 @@ const Register = () => {
   };
   const history = useHistory();
   useEffect(() => {
-    if(state.user.email) {
-      let url = history.location.search.replace('?', '/')
-      return history.push(url)
+    if (state.user.email) {
+      let url = history.location.search.replace("?", "/");
+      return history.push(url);
     }
-  },[state.user, history])
+  }, [state.user, history]);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const check = validRegister(user);
@@ -38,7 +39,13 @@ const Register = () => {
     }
   };
   return (
-    <section className="register container">
+    <section className="register container my-5" style={{ minHeight: "100vh" }}>
+      <h2 className="text-center">
+      <img src={require('../img/logo.png').default} alt="logo" style={{maxWidth: "100px" }}/>
+      </h2>
+      <h2 className="text-center">
+        <strong>Register</strong>
+      </h2>
       <div className="container">
         <form
           className="mx-auto my-5"
@@ -95,9 +102,10 @@ const Register = () => {
               onChange={handleInput}
             />
           </div>
-          <button type="submit" className="btn bg-dark text-white form-control">
+          <button type="submit" className="btn bg-color text-white form-control">
             Submit
           </button>
+          <p className="d-flex justify-content-between my-2">Already have a account? <u style={{cursor: 'pointer'}}><Link to="/login">Login</Link></u></p>
         </form>
       </div>
     </section>

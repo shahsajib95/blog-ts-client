@@ -1,48 +1,46 @@
-import axios from 'axios'
-axios.defaults.withCredentials = true
+import axios from "axios";
+axios.defaults.withCredentials = true;
 
-export const API_URL = "https://blog-ts-server.herokuapp.com/"
+export const api =
+  "https://blog-ts-server.herokuapp.com";
+export const API_URL = "http://localhost:5000";
 
-
-export const postAPI = async (url: string, post: object, token?:string) => {
+export const postAPI = async (url: string, post: object, token?: string) => {
   const res = await axios.post(`${API_URL}/api/${url}`, post, {
-    headers: { Authorization: token! }
-  })
+    headers: { Authorization: token! },
+  });
 
   return res;
-}
+};
 
-
-export const getAPI = async (url: string, token?:string) => {
+export const getAPI = async (url: string, token?: string) => {
   const res = await axios.get(`${API_URL}/api/${url}`, {
-    headers: { Authorization: token! }
-  })
+    headers: { Authorization: token! },
+  });
 
   return res;
-}
+};
 
-export const patchAPI = async (url: string, post: object, token?:string) => {
+export const patchAPI = async (url: string, post: object, token?: string) => {
   const res = await axios.patch(`${API_URL}/api/${url}`, post, {
-    headers: { Authorization: token! }
-  })
+    headers: { Authorization: token! },
+  });
 
   return res;
-}
+};
 
-
-export const putAPI = async (url: string, post: object, token?:string) => {
+export const putAPI = async (url: string, post: object, token?: string) => {
   const res = await axios.put(`${API_URL}/api/${url}`, post, {
-    headers: { Authorization: token! }
-  })
+    headers: { Authorization: token! },
+  });
 
   return res;
-}
+};
 
-
-export const deleteAPI = async (url: string, token?:string) => {
+export const deleteAPI = async (url: string, token?: string) => {
   const res = await axios.delete(`${API_URL}/api/${url}`, {
-    headers: { Authorization: token! }
-  })
+    headers: { Authorization: token! },
+  });
 
   return res;
-}
+};

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { DataContext } from "../../../store/GlobalState";
+import { DataContext, token } from "../../../store/GlobalState";
 import { deleteAPI } from "../../../utils/FetchData";
 import { IBlog } from "../../../utils/Typescript";
 
@@ -12,11 +12,12 @@ type IModal = {
   blog: IBlog[];
 };
 const Modal = ({ type, cat, id, title, setBlog, blog }: IModal) => {
+  console.log( type, cat, id, title, blog)
   const { dispatch } = useContext(DataContext);
   const handleModal = async () => {
     if (type === "delete" && cat === "blog") {
       dispatch({ type: "NOTIFY", payload: { loading: true } });
-      const res = await deleteAPI(`blog/delete/${id}`);
+      const res = await deleteAPI(`blog/delete/${id}`, JSON.parse(token!));
       if (res.data.err)
         return dispatch({ type: "NOTIFY", payload: { error: res.data.err } });
       dispatch({ type: "NOTIFY", payload: { loading: false } });
@@ -30,7 +31,7 @@ const Modal = ({ type, cat, id, title, setBlog, blog }: IModal) => {
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div className="modal-dialog">
+      <div className="modal-dialog text-dark">
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="exampleModalLabel">

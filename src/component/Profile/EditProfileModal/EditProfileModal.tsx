@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { DataContext } from "../../../store/GlobalState";
+import { DataContext, token } from "../../../store/GlobalState";
 import { getAPI, patchAPI } from "../../../utils/FetchData";
 import { InputChange, IUserDetails } from "../../../utils/Typescript";
+import { validUserEdit } from "../../../utils/Valid";
 import EditProfileForm from "./EditProfileForm";
+import { FcDiploma2 } from "react-icons/fc";
 
 type IProps = {
   user: IUserDetails;
@@ -25,22 +27,28 @@ const EditProfileModal: React.FC<IProps> = ({ user }: IProps) => {
 
   useEffect(() => {
     setUserData({ name: name, email: email });
-  }, []);
+  }, [name, email]);
 
   const { dispatch } = useContext(DataContext);
   const handleModal = async () => {
-    const res = await patchAPI(`user/details/${_id}`, userData);
-    if (res.data.modifiedCount) {
+    
+    const check = validUserEdit(userData)
+    if (check.errLength > 0)
+    return dispatch({ type: "NOTIFY", payload: { error: check.errMsg } });
+
+    dispatch({ type: "NOTIFY", payload: { loading: true } });
+    const res = await patchAPI(`user/details/${_id}`, userData,  JSON.parse(token!));
+    if (res.data.modifiedCount > 0) {
       const token = localStorage.getItem("token");
       if (token) {
         const res = await getAPI("accessToken", JSON.parse(token));
-        console.log(res.data)
         dispatch({ type: "USER", payload: res.data });
+        dispatch({ type: "NOTIFY", payload: { loading: false } });
       }
-    }else{
-      dispatch({ type: "NOTIFY", payload: {error: res.data.err} });
+    } else {
+      dispatch({ type: "NOTIFY", payload: { error: res.data.err } });
+      dispatch({ type: "NOTIFY", payload: { loading: false } });
     }
-    
   };
   return (
     <div
@@ -51,9 +59,9 @@ const EditProfileModal: React.FC<IProps> = ({ user }: IProps) => {
     >
       <div className="modal-dialog">
         <div className="modal-content">
-          <div className="modal-header">
+          <div className="modal-header bg-color">
             <h5 className="modal-title" id="exampleModalLabel">
-              Ediit Your Profile
+              <FcDiploma2 style={{fontSize: '2rem'}}/> Edit Your Profile
             </h5>
             <button
               type="button"

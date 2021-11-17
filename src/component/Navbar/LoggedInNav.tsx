@@ -4,10 +4,11 @@ import { FiLogOut } from "react-icons/fi";
 import { IUser } from "../../utils/Typescript";
 
 type IProps = {
-    user: IUser
+    user: IUser,
+    isActive: (value: any) => void
 }
 
-const LoggedInNav: React.FC<IProps> = ({user}: IProps) => {
+const LoggedInNav: React.FC<IProps> = ({user, isActive}: IProps) => {
 
     const logOut = () => {
         localStorage.removeItem("token");
@@ -16,7 +17,7 @@ const LoggedInNav: React.FC<IProps> = ({user}: IProps) => {
   return (
     <>
       <li className="nav-item">
-        <Link className="nav-link" to="/post-blog">
+        <Link className={"nav-link"  + isActive("/post-blog")}  to="/post-blog">
           Post Blog
         </Link>
       </li>
@@ -45,7 +46,7 @@ const LoggedInNav: React.FC<IProps> = ({user}: IProps) => {
           <div className="dropdown-divider"></div>
           <Link className="dropdown-item" to="#" onClick={logOut}>
             <FiLogOut />
-            <span className="ml-3">Log Out</span>
+            <span className="mx-3">Log Out</span>
           </Link>
         </div>
       </li>
