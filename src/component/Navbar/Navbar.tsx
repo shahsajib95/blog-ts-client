@@ -3,6 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import { DataContext } from "../../store/GlobalState";
 import LoggedInNav from "./LoggedInNav";
 import MobileHeader from "./MobileHeader";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { BiSearchAlt } from "react-icons/bi";
 
 const Navbar = () => {
   const { state } = useContext(DataContext);
@@ -45,11 +47,11 @@ const Navbar = () => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span className="navbar-toggler-icon" onClick={openNav}></span>
+            <GiHamburgerMenu onClick={openNav} />
           </button>
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav ms-auto">
+            <ul className="navbar-nav ms-auto d-flex align-items-center">
               <li className="nav-item">
                 <Link className={"nav-link" + isActive("/")} to="/">
                   Home
@@ -59,6 +61,14 @@ const Navbar = () => {
                 <LoggedInNav user={user} isActive={isActive} />
               ) : (
                 <>
+                  <li className="nav-item">
+                    <Link
+                      className={"nav-link" + isActive("/search")}
+                      to="/search"
+                    >
+                      <BiSearchAlt style={{ fontSize: "1.5rem" }} />
+                    </Link>
+                  </li>
                   <li className="nav-item">
                     <Link
                       className={"nav-link" + isActive("/login")}
@@ -72,7 +82,9 @@ const Navbar = () => {
                       className={"nav-link" + isActive("/register")}
                       to="/register"
                     >
-                      Register
+                      <button className="btn bg-color rounded-pill px-4">
+                        Register
+                      </button>
                     </Link>
                   </li>
                 </>

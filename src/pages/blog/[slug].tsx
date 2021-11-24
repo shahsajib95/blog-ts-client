@@ -23,8 +23,8 @@ const BlogDetails = () => {
   if (loading) return <Loading />;
   return (
     <section className="blog-details" style={{minHeight: '100vh'}}>
-      {blog.map((item) => (
-        <Details blog={item} key={item._id} />
+      {blog.map((item, index) => (
+        <Details blog={item} key={index} />
       ))}
     </section>
   );

@@ -1,5 +1,6 @@
 export const ACTIONS = {
   NOTIFY: "NOTIFY",
-  USER: 'USER'
+  USER: 'USER',
+  SOCKET: "SOCKET"
 };
 

@@ -13,3 +13,18 @@
 .nav-tabs .nav-link{
   color: rgb(0, 0, 0)!important;
 }
+.search{
+  position: relative;
+  min-width: 400px;
+}
+.btn-search{
+  position: absolute;
+  top: 0;
+  right: -1px;
+}
+
+@media only screen and (max-width: 667px) {
+  .search {
+    min-width: 300px;
+  }
+}

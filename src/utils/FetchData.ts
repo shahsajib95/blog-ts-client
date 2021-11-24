@@ -1,9 +1,8 @@
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
-export const api =
-  "https://blog-ts-server.herokuapp.com";
-export const API_URL = "http://localhost:5000";
+export const api  = "https://blog-ts-server.herokuapp.com";
+export const  API_URL = "http://localhost:5000";
 
 export const postAPI = async (url: string, post: object, token?: string) => {
   const res = await axios.post(`${API_URL}/api/${url}`, post, {

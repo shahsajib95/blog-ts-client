@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import { Alert } from "./component/global/Alert/Notify";
@@ -8,6 +8,8 @@ import PageRender from "./PageRender";
 import Footer from "./component/Footer/Footer";
 
 function App() {
+
+
   return (
     <div>
       <DataProvider>

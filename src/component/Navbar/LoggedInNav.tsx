@@ -2,23 +2,28 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FiLogOut } from "react-icons/fi";
 import { IUser } from "../../utils/Typescript";
+import { BiSearchAlt } from "react-icons/bi";
 
 type IProps = {
-    user: IUser,
-    isActive: (value: any) => void
-}
+  user: IUser;
+  isActive: (value: any) => void;
+};
 
-const LoggedInNav: React.FC<IProps> = ({user, isActive}: IProps) => {
-
-    const logOut = () => {
-        localStorage.removeItem("token");
-        window.location.href = "/";
-      };
+const LoggedInNav: React.FC<IProps> = ({ user, isActive }: IProps) => {
+  const logOut = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/";
+  };
   return (
     <>
       <li className="nav-item">
-        <Link className={"nav-link"  + isActive("/post-blog")}  to="/post-blog">
+        <Link className={"nav-link" + isActive("/post-blog")} to="/post-blog">
           Post Blog
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link className={"nav-link" + isActive("/search")} to="/search">
+          <BiSearchAlt style={{ fontSize: "1.5rem" }} />
         </Link>
       </li>
 

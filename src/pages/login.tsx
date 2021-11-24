@@ -50,7 +50,7 @@ const Login = () => {
       </h2>
       <div className="container">
         <form
-          className="mx-auto my-5"
+          className="mx-auto my-5 shadow-sm p-5 rounded"
           style={{ maxWidth: "500px" }}
           onSubmit={handleSubmit}
         >
@@ -81,7 +81,7 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="btn bg-color text-white form-control"
+            className="btn bg-color text-white form-control rounded-pill"
           >
             Submit
           </button>
