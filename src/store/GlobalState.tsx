@@ -1,7 +1,8 @@
 import { createContext, useReducer, Dispatch, useEffect } from "react";
-import { getAPI } from "../utils/FetchData";
+import { API_URL, getAPI } from "../utils/FetchData";
 import { Children } from "../utils/Typescript";
 import reducers, { State, StateAction } from "./Reducer";
+import io from "socket.io-client";
 
 export const token = localStorage.getItem("token");
 
@@ -13,6 +14,7 @@ type StateProps = {
 const initialState = {
   notify: {},
   user: {},
+  socket: null,
 };
 
 export const DataContext = createContext<StateProps>({
@@ -23,6 +25,14 @@ export const DataContext = createContext<StateProps>({
 export const DataProvider = ({ children }: Children) => {
   const [state, dispatch] = useReducer(reducers, initialState);
   const token = localStorage.getItem("token");
+
+  
+  useEffect(() => {
+    const socket = io(API_URL);
+    dispatch({ type: "SOCKET", payload: socket });
+    return () => { socket.close() }
+  }, [dispatch]);
+
 
   useEffect(() => {
     if (token) {

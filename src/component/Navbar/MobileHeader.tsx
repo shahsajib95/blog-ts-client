@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { DataContext } from "../../store/GlobalState";
+import { BiSearchAlt } from "react-icons/bi";
 
 const MobileHeader = ({ openNav }: any) => {
   const { state } = useContext(DataContext);
@@ -45,6 +46,11 @@ const MobileHeader = ({ openNav }: any) => {
               <Link to="/post-blog">
                 <li className="p-3">Post Blog</li>
               </Link>
+              <Link to="/search">
+                <li className="p-3">
+                <BiSearchAlt style={{ fontSize: "1.5rem" }} /> <span className="mx-2">Search</span>
+                </li>
+              </Link>
               <Link to={`/profile/${user._id}`}>
                 <li className="p-3">
                   <img
@@ -58,10 +64,15 @@ const MobileHeader = ({ openNav }: any) => {
             </>
           ) : (
             <>
-              <Link to="/">
+              <Link to="/search">
+                <li className="p-3">
+                  <BiSearchAlt style={{ fontSize: "1.5rem" }} /> <span className="mx-2">Search</span>
+                </li>
+              </Link>
+              <Link to="/login">
                 <li className="p-3">Login</li>
               </Link>
-              <Link to="/">
+              <Link to="/register">
                 <li className="p-3">Register</li>
               </Link>
             </>

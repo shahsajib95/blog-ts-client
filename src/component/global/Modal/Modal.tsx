@@ -12,7 +12,6 @@ type IModal = {
   blog: IBlog[];
 };
 const Modal = ({ type, cat, id, title, setBlog, blog }: IModal) => {
-  console.log( type, cat, id, title, blog)
   const { dispatch } = useContext(DataContext);
   const handleModal = async () => {
     if (type === "delete" && cat === "blog") {

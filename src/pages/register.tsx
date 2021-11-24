@@ -48,7 +48,7 @@ const Register = () => {
       </h2>
       <div className="container">
         <form
-          className="mx-auto my-5"
+          className="mx-auto my-5 shadow-sm p-5"
           style={{ maxWidth: "500px" }}
           onSubmit={handleSubmit}
         >
@@ -102,7 +102,7 @@ const Register = () => {
               onChange={handleInput}
             />
           </div>
-          <button type="submit" className="btn bg-color text-white form-control">
+          <button type="submit"  className="btn bg-color text-white form-control rounded-pill">
             Submit
           </button>
           <p className="d-flex justify-content-between my-2">Already have a account? <u style={{cursor: 'pointer'}}><Link to="/login">Login</Link></u></p>

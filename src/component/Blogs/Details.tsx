@@ -1,18 +1,30 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { IBlog } from "../../utils/Typescript";
 import parse from "html-react-parser";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import Like from "./Like/Like";
+import Comment from "./Comment/Comment";
 import { BsFillCalendarCheckFill } from "react-icons/bs";
 import { DataContext } from "../../store/GlobalState";
 
 interface IProps {
   blog: IBlog;
 }
+
 const Details: React.FC<IProps> = ({ blog }: IProps) => {
   const { state } = useContext(DataContext);
   const { _id, title, user, thumbnail, createdAt, body, tags, love } = blog;
+
+    // Join Room
+    useEffect(() => {
+      if(!_id || !state.socket) return;
+      state.socket.emit('joinRoom', _id)
+  
+      return () => {
+        state.socket.emit('outRoom', _id)
+      }
+    },[state.socket, _id])
 
   return (
     <>
@@ -64,6 +76,8 @@ const Details: React.FC<IProps> = ({ blog }: IProps) => {
             </button>
           ))}
         </div>
+        {/* Comment */}
+        <Comment blog_id={_id} blog_user_id={user._id}/>
       </div>
     </>
   );

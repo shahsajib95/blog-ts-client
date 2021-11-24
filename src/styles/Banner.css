@@ -1,0 +1,15 @@
+.banner{
+    background-image: url('../img/banner.jpg');
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.banner .btn{
+    font-size: 20px;
+}
+.banner .btn:hover{
+    background-color: #fff!important;
+    color: black !important;
+    border: 1px solid #7452f0;
+}
